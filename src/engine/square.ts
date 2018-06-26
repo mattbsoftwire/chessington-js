@@ -12,6 +12,10 @@ export default class Square {
         return new Square(row, col);
     }
 
+    static translate(square: Square, rowChange, colChange): Square {
+        return Square.at(square.row + rowChange, square.col + colChange);
+    }
+
     equals(otherSquare): boolean {
         return !!otherSquare && this.row === otherSquare.row && this.col === otherSquare.col;
     }

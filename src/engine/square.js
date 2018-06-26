@@ -6,6 +6,9 @@ var Square = /** @class */ (function () {
     Square.at = function (row, col) {
         return new Square(row, col);
     };
+    Square.translate = function (square, rowChange, colChange) {
+        return Square.at(square.row + rowChange, square.col + colChange);
+    };
     Square.prototype.equals = function (otherSquare) {
         return !!otherSquare && this.row === otherSquare.row && this.col === otherSquare.col;
     };

@@ -8,7 +8,7 @@ type BoardType = Piece[][];
 export default class Board {
 
     currentPlayer: Player;
-    board: BoardType;
+    private readonly board: BoardType;
 
     constructor() {
         this.currentPlayer = Player.WHITE;
