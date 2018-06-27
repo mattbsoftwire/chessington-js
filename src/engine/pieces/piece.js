@@ -17,7 +17,7 @@ var Piece = /** @class */ (function () {
             for (var _i = 0, directions_1 = directions; _i < directions_1.length; _i++) {
                 var direction = directions_1[_i];
                 var translation = direction.map(function (x) { return x * i; });
-                var move = currentSquare.translate(translation[0], translation[1]);
+                var move = currentSquare.translate(translation);
                 if (move.isValid()) {
                     moves.push(move);
                 }
@@ -25,6 +25,18 @@ var Piece = /** @class */ (function () {
         };
         for (var i = 1; i < GameSettings.BOARD_SIZE; i++) {
             _loop_1(i);
+        }
+        return moves;
+    };
+    Piece.prototype.getMovesToSquares = function (board, relativePositions) {
+        var currentSquare = board.findPiece(this);
+        var moves = [];
+        for (var _i = 0, relativePositions_1 = relativePositions; _i < relativePositions_1.length; _i++) {
+            var position = relativePositions_1[_i];
+            var move = currentSquare.translate(position);
+            if (move.isValid()) {
+                moves.push(move);
+            }
         }
         return moves;
     };

@@ -14,8 +14,8 @@ export default class Square {
         return new Square(row, col);
     }
 
-    translate(rowChange: number, colChange: number): Square {
-        return Square.at(this.row + rowChange, this.col + colChange);
+    translate(translation: number[]): Square {
+        return Square.at(this.row + translation[0], this.col + translation[1]);
     }
 
     isValid(): boolean {

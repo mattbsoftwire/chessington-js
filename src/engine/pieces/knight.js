@@ -15,7 +15,16 @@ var Knight = /** @class */ (function (_super) {
         return _super.call(this, player) || this;
     }
     Knight.prototype.getAvailableMoves = function (board) {
-        return new Array(0);
+        return this.getMovesToSquares(board, [
+            [2, 1],
+            [1, 2],
+            [-2, 1],
+            [1, -2],
+            [-2, -1],
+            [-1, -2],
+            [2, -1],
+            [-1, 2]
+        ]);
     };
     return Knight;
 }(Piece));

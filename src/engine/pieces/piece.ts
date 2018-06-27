@@ -19,13 +19,13 @@ export default class Piece {
         board.movePiece(currentSquare, newSquare);
     }
 
-    getMovesInDirections(board:Board, directions: number[][]): Square[] {
+    getMovesInDirections(board: Board, directions: number[][]): Square[] {
         const currentSquare: Square = board.findPiece(this)
         const moves: Square[] = []
         for (let i = 1; i < GameSettings.BOARD_SIZE; i++) {
             for (let direction of directions) {
                 const translation: number[] = direction.map(x => x * i)
-                const move = currentSquare.translate(translation[0], translation[1])
+                const move = currentSquare.translate(translation)
                 if (move.isValid()) {
                     moves.push(move)
                 }
@@ -33,4 +33,18 @@ export default class Piece {
         }
         return moves
     }
+
+    getMovesToSquares(board: Board, relativePositions: number[][]): Square[] {
+        const currentSquare: Square = board.findPiece(this)
+        const moves: Square[] = []
+        for (let position of relativePositions) {
+            const move = currentSquare.translate(position)
+            if (move.isValid()) {
+                moves.push(move)
+            }
+        }
+        return moves
+    }
+
+
 }

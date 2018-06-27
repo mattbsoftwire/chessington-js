@@ -17,20 +17,20 @@ var Pawn = /** @class */ (function (_super) {
     }
     Pawn.prototype.getAvailableMoves = function (board) {
         var currentSquare = board.findPiece(this);
+        var moves = [];
         if (this.player === Player.WHITE) {
-            var moves = [currentSquare.translate(1, 0)];
+            moves.push([1, 0]);
             if (currentSquare.row === 1) {
-                moves.push(currentSquare.translate(2, 0));
+                moves.push([2, 0]);
             }
-            return moves;
         }
         else {
-            var moves = [currentSquare.translate(-1, 0)];
+            moves.push([-1, 0]);
             if (currentSquare.row === 6) {
-                moves.push(currentSquare.translate(-2, 0));
+                moves.push([-2, 0]);
             }
-            return moves;
         }
+        return this.getMovesToSquares(board, moves);
     };
     return Pawn;
 }(Piece));

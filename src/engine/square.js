@@ -7,8 +7,8 @@ var Square = /** @class */ (function () {
     Square.at = function (row, col) {
         return new Square(row, col);
     };
-    Square.prototype.translate = function (rowChange, colChange) {
-        return Square.at(this.row + rowChange, this.col + colChange);
+    Square.prototype.translate = function (translation) {
+        return Square.at(this.row + translation[0], this.col + translation[1]);
     };
     Square.prototype.isValid = function () {
         return this.row >= 0 && this.row < GameSettings.BOARD_SIZE && this.col >= 0 && this.col < GameSettings.BOARD_SIZE;
