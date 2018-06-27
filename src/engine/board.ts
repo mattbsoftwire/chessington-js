@@ -3,15 +3,15 @@ import GameSettings from './gameSettings';
 import Square from './square';
 import Piece from "./pieces/piece";
 
-type BoardType = Piece[][];
-
+type BoardType = PieceType[][];
+type PieceType = (Piece|undefined)
 export default class Board {
 
-    currentPlayer: Player;
+    currentPlayer: string;
     private readonly board: BoardType;
 
-    constructor() {
-        this.currentPlayer = Player.WHITE;
+    constructor(player: string = Player.WHITE) {
+        this.currentPlayer = player;
         this.board = this.createBoard();
     }
 
@@ -23,15 +23,15 @@ export default class Board {
         return board;
     }
 
-    setPiece(square, piece): void {
+    setPiece(square: Square, piece: PieceType): void {
         this.board[square.row][square.col] = piece;
     }
 
-    getPiece(square): Piece {
+    getPiece(square: Square): PieceType {
         return this.board[square.row][square.col];
     }
 
-    findPiece(pieceToFind): Square {
+    findPiece(pieceToFind: PieceType): Square {
         for (let row = 0; row < this.board.length; row++) {
             for (let col = 0; col < this.board[row].length; col++) {
                 if (this.board[row][col] === pieceToFind) {
@@ -42,8 +42,8 @@ export default class Board {
         throw new Error('The supplied piece is not on the board');
     }
 
-    movePiece(fromSquare, toSquare): void {
-        const movingPiece = this.getPiece(fromSquare);        
+    movePiece(fromSquare: Square, toSquare: Square): void {
+        const movingPiece = this.getPiece(fromSquare);
         if (!!movingPiece && movingPiece.player === this.currentPlayer) {
             this.setPiece(toSquare, movingPiece);
             this.setPiece(fromSquare, undefined);

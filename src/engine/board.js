@@ -2,8 +2,9 @@ import Player from './player';
 import GameSettings from './gameSettings';
 import Square from './square';
 var Board = /** @class */ (function () {
-    function Board() {
-        this.currentPlayer = Player.WHITE;
+    function Board(player) {
+        if (player === void 0) { player = Player.WHITE; }
+        this.currentPlayer = player;
         this.board = this.createBoard();
     }
     Board.prototype.createBoard = function () {

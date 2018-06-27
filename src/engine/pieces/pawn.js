@@ -19,10 +19,18 @@ var Pawn = /** @class */ (function (_super) {
     Pawn.prototype.getAvailableMoves = function (board) {
         var currentSquare = board.findPiece(this);
         if (this.player === Player.WHITE) {
-            return [Square.translate(currentSquare, 1, 0)];
+            var moves = [Square.translate(currentSquare, 1, 0)];
+            if (currentSquare.row === 1) {
+                moves.push(Square.translate(currentSquare, 2, 0));
+            }
+            return moves;
         }
         else {
-            return [Square.translate(currentSquare, -1, 0)];
+            var moves = [Square.translate(currentSquare, -1, 0)];
+            if (currentSquare.row === 6) {
+                moves.push(Square.translate(currentSquare, -2, 0));
+            }
+            return moves;
         }
     };
     return Pawn;

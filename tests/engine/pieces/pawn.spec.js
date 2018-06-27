@@ -17,7 +17,6 @@ describe('Pawn', () => {
             pawn.moveTo(board, Square.at(2, 0));
 
             const moves = pawn.getAvailableMoves(board);
-            
             moves.should.have.length(1);
             moves.should.deep.include(Square.at(3, 0));
         });
@@ -45,7 +44,7 @@ describe('Pawn', () => {
             pawn.moveTo(board, Square.at(5, 0));
 
             const moves = pawn.getAvailableMoves(board);
-            
+
             moves.should.have.length(1);
             moves.should.deep.include(Square.at(4, 0));
         });
