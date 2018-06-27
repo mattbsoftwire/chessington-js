@@ -1,7 +1,6 @@
 import Piece from './piece';
 import Board from '../board';
 import Square from '../square';
-import GameSettings from "../gameSettings";
 
 export default class Rook extends Piece {
     constructor(player) {

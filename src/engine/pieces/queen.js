@@ -15,7 +15,7 @@ var Queen = /** @class */ (function (_super) {
         return _super.call(this, player) || this;
     }
     Queen.prototype.getAvailableMoves = function (board) {
-        return new Array(0);
+        return this.getMovesInDirections(board, [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]);
     };
     return Queen;
 }(Piece));
