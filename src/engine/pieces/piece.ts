@@ -26,7 +26,7 @@ export default class Piece {
             for (let direction of directions) {
                 const translation: number[] = direction.map(x => x * i)
                 const move = currentSquare.translate(translation)
-                if (move.isValid()) {
+                if (move.isValid() && !this.isJumping(board, move)) {
                     moves.push(move)
                 }
             }

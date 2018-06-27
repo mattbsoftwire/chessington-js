@@ -18,11 +18,12 @@ var Piece = /** @class */ (function () {
                 var direction = directions_1[_i];
                 var translation = direction.map(function (x) { return x * i; });
                 var move = currentSquare.translate(translation);
-                if (move.isValid()) {
+                if (move.isValid() && !this_1.isJumping(board, move)) {
                     moves.push(move);
                 }
             }
         };
+        var this_1 = this;
         for (var i = 1; i < GameSettings.BOARD_SIZE; i++) {
             _loop_1(i);
         }
