@@ -15,7 +15,16 @@ var King = /** @class */ (function (_super) {
         return _super.call(this, player) || this;
     }
     King.prototype.getAvailableMoves = function (board) {
-        return new Array(0);
+        return this.getMovesToSquares(board, [
+            [0, 1],
+            [1, 0],
+            [-1, 0],
+            [0, -1],
+            [1, 1],
+            [-1, -1],
+            [-1, 1],
+            [1, -1]
+        ]);
     };
     return King;
 }(Piece));

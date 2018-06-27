@@ -6,6 +6,15 @@ export default class King extends Piece {
     }
 
     getAvailableMoves(board) {
-        return new Array(0);
+        return this.getMovesToSquares(board, [
+            [0, 1],
+            [1, 0],
+            [-1, 0],
+            [0, -1],
+            [1, 1],
+            [-1, -1],
+            [-1, 1],
+            [1, -1]
+        ])
     }
 }
