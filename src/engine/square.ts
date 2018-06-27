@@ -1,3 +1,5 @@
+import GameSettings from "./gameSettings";
+
 export default class Square {
 
     readonly row: number;
@@ -12,8 +14,12 @@ export default class Square {
         return new Square(row, col);
     }
 
-    static translate(square: Square, rowChange, colChange): Square {
-        return Square.at(square.row + rowChange, square.col + colChange);
+    translate(rowChange: number, colChange: number): Square {
+        return Square.at(this.row + rowChange, this.col + colChange);
+    }
+
+    isValid(): boolean {
+        return this.row >= 0 && this.row < GameSettings.BOARD_SIZE && this.col >= 0 && this.col < GameSettings.BOARD_SIZE
     }
 
     equals(otherSquare): boolean {

@@ -9,7 +9,6 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import Piece from './piece';
-import Square from '../square';
 import Player from "../player";
 var Pawn = /** @class */ (function (_super) {
     __extends(Pawn, _super);
@@ -19,16 +18,16 @@ var Pawn = /** @class */ (function (_super) {
     Pawn.prototype.getAvailableMoves = function (board) {
         var currentSquare = board.findPiece(this);
         if (this.player === Player.WHITE) {
-            var moves = [Square.translate(currentSquare, 1, 0)];
+            var moves = [currentSquare.translate(1, 0)];
             if (currentSquare.row === 1) {
-                moves.push(Square.translate(currentSquare, 2, 0));
+                moves.push(currentSquare.translate(2, 0));
             }
             return moves;
         }
         else {
-            var moves = [Square.translate(currentSquare, -1, 0)];
+            var moves = [currentSquare.translate(-1, 0)];
             if (currentSquare.row === 6) {
-                moves.push(Square.translate(currentSquare, -2, 0));
+                moves.push(currentSquare.translate(-2, 0));
             }
             return moves;
         }

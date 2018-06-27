@@ -15,7 +15,7 @@ var Bishop = /** @class */ (function (_super) {
         return _super.call(this, player) || this;
     }
     Bishop.prototype.getAvailableMoves = function (board) {
-        return new Array(0);
+        return this.getMovesInDirections(board, [[1, 1], [1, -1], [-1, 1], [-1, -1]]);
     };
     return Bishop;
 }(Piece));

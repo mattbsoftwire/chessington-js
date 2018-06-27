@@ -1,3 +1,4 @@
+import GameSettings from "./gameSettings";
 var Square = /** @class */ (function () {
     function Square(row, col) {
         this.row = row;
@@ -6,8 +7,11 @@ var Square = /** @class */ (function () {
     Square.at = function (row, col) {
         return new Square(row, col);
     };
-    Square.translate = function (square, rowChange, colChange) {
-        return Square.at(square.row + rowChange, square.col + colChange);
+    Square.prototype.translate = function (rowChange, colChange) {
+        return Square.at(this.row + rowChange, this.col + colChange);
+    };
+    Square.prototype.isValid = function () {
+        return this.row >= 0 && this.row < GameSettings.BOARD_SIZE && this.col >= 0 && this.col < GameSettings.BOARD_SIZE;
     };
     Square.prototype.equals = function (otherSquare) {
         return !!otherSquare && this.row === otherSquare.row && this.col === otherSquare.col;
