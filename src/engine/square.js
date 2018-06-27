@@ -7,6 +7,22 @@ var Square = /** @class */ (function () {
     Square.at = function (row, col) {
         return new Square(row, col);
     };
+    Square.prototype.getSquaresBetween = function (other) {
+        var diffs = [other.row - this.row, other.col - this.col];
+        var direction = diffs.map(function (x) {
+            if (x != 0) {
+                return x / Math.abs(x);
+            }
+            return 0;
+        });
+        var checkSquare = this.translate(direction);
+        var res = [];
+        while (!checkSquare.equals(other)) {
+            res.push(checkSquare);
+            checkSquare = checkSquare.translate(direction);
+        }
+        return res;
+    };
     Square.prototype.translate = function (translation) {
         return Square.at(this.row + translation[0], this.col + translation[1]);
     };

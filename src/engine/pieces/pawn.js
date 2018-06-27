@@ -30,7 +30,7 @@ var Pawn = /** @class */ (function (_super) {
                 moves.push([-2, 0]);
             }
         }
-        return this.getMovesToSquares(board, moves);
+        return this.getMovesToSquares(board, moves, false, false);
     };
     return Pawn;
 }(Piece));

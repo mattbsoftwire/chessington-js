@@ -1,5 +1,5 @@
 import Piece from './piece';
-import Board from "../../../dist/engine/board";
+import Board from '../board';
 
 export default class Knight extends Piece {
     constructor(player) {

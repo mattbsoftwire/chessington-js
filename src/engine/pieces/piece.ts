@@ -34,16 +34,26 @@ export default class Piece {
         return moves
     }
 
-    getMovesToSquares(board: Board, relativePositions: number[][]): Square[] {
+    getMovesToSquares(board: Board, relativePositions: number[][], allowTaking: boolean = true, allowJumping: boolean = true): Square[] {
         const currentSquare: Square = board.findPiece(this)
         const moves: Square[] = []
         for (let position of relativePositions) {
             const move = currentSquare.translate(position)
-            if (move.isValid()) {
+            if (move.isValid() && (allowTaking || !board.getPiece(move)) && (allowJumping || !this.isJumping(board, move))) {
                 moves.push(move)
             }
         }
         return moves
+    }
+
+    private isJumping(board: Board, position: Square): boolean {
+        const currentSquare: Square = board.findPiece(this)
+        for (let square of currentSquare.getSquaresBetween(position)) {
+            if (board.getPiece(square)) {
+                return true
+            }
+        }
+        return false
     }
 
 

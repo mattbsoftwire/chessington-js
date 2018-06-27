@@ -22,6 +22,6 @@ export default class Pawn extends Piece {
                 moves.push([-2, 0])
             }
         }
-        return this.getMovesToSquares(board, moves)
+        return this.getMovesToSquares(board, moves, false, false)
     }
 }

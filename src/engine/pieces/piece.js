@@ -28,17 +28,29 @@ var Piece = /** @class */ (function () {
         }
         return moves;
     };
-    Piece.prototype.getMovesToSquares = function (board, relativePositions) {
+    Piece.prototype.getMovesToSquares = function (board, relativePositions, allowTaking, allowJumping) {
+        if (allowTaking === void 0) { allowTaking = true; }
+        if (allowJumping === void 0) { allowJumping = true; }
         var currentSquare = board.findPiece(this);
         var moves = [];
         for (var _i = 0, relativePositions_1 = relativePositions; _i < relativePositions_1.length; _i++) {
             var position = relativePositions_1[_i];
             var move = currentSquare.translate(position);
-            if (move.isValid()) {
+            if (move.isValid() && (allowTaking || !board.getPiece(move)) && (allowJumping || !this.isJumping(board, move))) {
                 moves.push(move);
             }
         }
         return moves;
+    };
+    Piece.prototype.isJumping = function (board, position) {
+        var currentSquare = board.findPiece(this);
+        for (var _i = 0, _a = currentSquare.getSquaresBetween(position); _i < _a.length; _i++) {
+            var square = _a[_i];
+            if (board.getPiece(square)) {
+                return true;
+            }
+        }
+        return false;
     };
     return Piece;
 }());

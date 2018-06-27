@@ -14,6 +14,24 @@ export default class Square {
         return new Square(row, col);
     }
 
+    getSquaresBetween(other: Square): Square[] {
+        const diffs = [other.row - this.row, other.col - this.col]
+        const direction = diffs.map(x => {
+            if(x != 0){
+                return x/Math.abs(x)
+            }
+            return 0
+        })
+        let checkSquare = this.translate(direction)
+        const res: Square[] = []
+        while(!checkSquare.equals(other)) {
+            res.push(checkSquare)
+            checkSquare = checkSquare.translate(direction)
+        }
+        return res
+    }
+
+
     translate(translation: number[]): Square {
         return Square.at(this.row + translation[0], this.col + translation[1]);
     }
