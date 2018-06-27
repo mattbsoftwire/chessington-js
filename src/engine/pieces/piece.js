@@ -18,7 +18,7 @@ var Piece = /** @class */ (function () {
                 var direction = directions_1[_i];
                 var translation = direction.map(function (x) { return x * i; });
                 var move = currentSquare.translate(translation);
-                if (move.isValid() && !this_1.isJumping(board, move)) {
+                if (move.isValid() && !this_1.isJumping(board, move) && !this_1.friendlyFire(board, move)) {
                     moves.push(move);
                 }
             }
@@ -37,7 +37,7 @@ var Piece = /** @class */ (function () {
         for (var _i = 0, relativePositions_1 = relativePositions; _i < relativePositions_1.length; _i++) {
             var position = relativePositions_1[_i];
             var move = currentSquare.translate(position);
-            if (move.isValid() && (allowTaking || !board.getPiece(move)) && (allowJumping || !this.isJumping(board, move))) {
+            if (move.isValid() && (allowTaking || !board.getPiece(move)) && (allowJumping || !this.isJumping(board, move)) && !this.friendlyFire(board, move)) {
                 moves.push(move);
             }
         }
@@ -50,6 +50,13 @@ var Piece = /** @class */ (function () {
             if (board.getPiece(square)) {
                 return true;
             }
+        }
+        return false;
+    };
+    Piece.prototype.friendlyFire = function (board, position) {
+        var otherPiece = board.getPiece(position);
+        if (otherPiece) {
+            return otherPiece.player === board.currentPlayer;
         }
         return false;
     };

@@ -26,7 +26,7 @@ export default class Piece {
             for (let direction of directions) {
                 const translation: number[] = direction.map(x => x * i)
                 const move = currentSquare.translate(translation)
-                if (move.isValid() && !this.isJumping(board, move)) {
+                if (move.isValid() && !this.isJumping(board, move) && !this.friendlyFire(board, move)) {
                     moves.push(move)
                 }
             }
@@ -39,7 +39,7 @@ export default class Piece {
         const moves: Square[] = []
         for (let position of relativePositions) {
             const move = currentSquare.translate(position)
-            if (move.isValid() && (allowTaking || !board.getPiece(move)) && (allowJumping || !this.isJumping(board, move))) {
+            if (move.isValid() && (allowTaking || !board.getPiece(move)) && (allowJumping || !this.isJumping(board, move)) && !this.friendlyFire(board, move)) {
                 moves.push(move)
             }
         }
@@ -52,6 +52,14 @@ export default class Piece {
             if (board.getPiece(square)) {
                 return true
             }
+        }
+        return false
+    }
+
+    private friendlyFire(board: Board, position: Square): boolean {
+        const otherPiece = board.getPiece(position)
+        if (otherPiece) {
+            return otherPiece.player === board.currentPlayer
         }
         return false
     }
